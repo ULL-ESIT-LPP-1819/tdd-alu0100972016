@@ -42,4 +42,10 @@ RSpec.describe InformacionNutricional do
 	  expect(@pan.salt).to eq(0.4)
   end
 
+  it "has calories" do
+	  @pan.calculate_calories
+	  expect(@pan.kcal).to eq(203.8)
+	  expect(@pan.kj).to eq(862.4)
+  end
+
 end
