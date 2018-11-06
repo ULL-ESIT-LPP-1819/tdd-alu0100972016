@@ -3,7 +3,7 @@ require 'InformacionNutricional/etiqueta.rb'
 RSpec.describe InformacionNutricional do
  
   before :all do
-	  @pan = Etiqueta.new("Pan", true, 28.5, 15.0, 3.8, 1.8, 38.0, 2.5, 3.8, 0.4)
+	  @pan = Etiqueta.new("Pan", true, 28, 15.0, 3.8, 1.8, 38.0, 2.5, 3.8, 0.4)
   end
 
   it "has a version number" do
@@ -48,4 +48,7 @@ RSpec.describe InformacionNutricional do
 	  expect(@pan.kj).to eq(862.4)
   end
 
+  it "has format" do
+	  expect(@pan.to_s).to eq("PAN(28 porciones; 15.0g/porcion): Por 100g - IR; VALOR ENERGETICO: 203.8 kcal/862.4 kJ - 2000 kcal/8400 kJ; GRASAS: 3.8g - 70g; SATURADAS: 1.8g - 20g; CARBOHIDRATOS: 38.0g - 260g; AZUCARES: 2.5g - 90g; PROTEINAS: 3.8g - 50g; SAL: 0.4g - 6g;")
+  end
 end
