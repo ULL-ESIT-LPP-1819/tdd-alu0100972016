@@ -4,6 +4,7 @@ RSpec.describe InformacionNutricional do
  
   before :all do
 	  @pan = Etiqueta.new("Pan", true, 28, 15.0, 3.8, 1.8, 38.0, 2.5, 3.8, 0.4)
+    @mylist = List.new(@pan)
   end
 
   it "has a version number" do
@@ -51,4 +52,17 @@ RSpec.describe InformacionNutricional do
   it "has format" do
 	  expect(@pan.to_s).to eq("PAN(28 porciones; 15.0g/porcion): Por 100g - IR; VALOR ENERGETICO: 203.8 kcal/862.4 kJ - 2000 kcal/8400 kJ; GRASAS: 3.8g - 70g; SATURADAS: 1.8g - 20g; CARBOHIDRATOS: 38.0g - 260g; AZUCARES: 2.5g - 90g; PROTEINAS: 3.8g - 50g; SAL: 0.4g - 6g;")
   end
+
+  describe "#Initialize the List" do
+    it 'First' do
+      expect(@mylist.head.prev).to eq(nil)
+      expect(@mylist.head.value.name).to eq("Pan")
+      expect(@mylist.head.next).to eq(nil)
+
+      expect(@mylist.tale.prev).to eq(nil)
+      expect(@mylist.tale.value.name).to eq("Pan")
+      expect(@mylist.tale.next).to eq(nil)
+    end
+  end
+
 end
