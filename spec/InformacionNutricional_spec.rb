@@ -64,6 +64,18 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.tale.value.name).to eq("Pan")
       expect(@mylist.tale.next).to eq(nil)
     end
+
+    it 'Adding 1 node' do
+      @mylist.insert_head(@queso)
+      expect(@mylist.head.prev).to eq(nil)
+      expect(@mylist.head.value.name).to eq("Queso")
+      expect(@mylist.head.next.value.name).to eq("Pan")
+
+      @mylist.insert_tale(@leche)
+      expect(@mylist.tale.prev.value.name).to eq("Pan")
+      expect(@mylist.tale.value.name).to eq("Leche")
+      expect(@mylist.tale.next).to eq(nil)
+    end
   end
 
 end
