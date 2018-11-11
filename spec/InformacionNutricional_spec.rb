@@ -1,4 +1,5 @@
 require 'InformacionNutricional/etiqueta.rb'
+require 'InformacionNutricional/list.rb'
 
 RSpec.describe InformacionNutricional do
  
