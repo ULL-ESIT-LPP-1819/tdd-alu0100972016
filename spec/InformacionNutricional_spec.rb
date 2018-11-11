@@ -60,8 +60,8 @@ RSpec.describe InformacionNutricional do
 	  expect(@pan.to_s).to eq("PAN(28 porciones; 15.0g/porcion): Por 100g - IR; VALOR ENERGETICO: 203.8 kcal/862.4 kJ - 2000 kcal/8400 kJ; GRASAS: 3.8g - 70g; SATURADAS: 1.8g - 20g; CARBOHIDRATOS: 38.0g - 260g; AZUCARES: 2.5g - 90g; PROTEINAS: 3.8g - 50g; SAL: 0.4g - 6g;")
   end
 
-  describe "#Initialize the List" do
-    it 'First' do
+  describe "#List" do
+    it "First" do
       expect(@mylist.head.prev).to eq(nil)
       expect(@mylist.head.value.name).to eq("Pan")
       expect(@mylist.head.next).to eq(nil)
@@ -71,7 +71,7 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.tale.next).to eq(nil)
     end
 
-    it 'Adding 1 node' do
+    it "Adding 1 node" do
       @mylist.insert_head(@queso)
       expect(@mylist.head.prev).to eq(nil)
       expect(@mylist.head.value.name).to eq("Queso")
@@ -83,7 +83,7 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.tale.next).to eq(nil)
     end
 
-    it 'Adding more than one node at a time' do
+    it "Adding more than one node at a time" do
       @mylist.insert_n_to_head([@chocolate_untar, @galletas])
       expect(@mylist.head.prev).to eq(nil)
       expect(@mylist.head.value.name).to eq("Galletas")
@@ -93,7 +93,10 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.tale.prev.value.name).to eq("Sopa")
       expect(@mylist.tale.value.name).to eq("Salsa de Tomate")
       expect(@mylist.tale.next).to eq(nil)
+    end
 
+    id "Sorting minor to mayor grams of salt" do
+      expect(@mylist.sort_salt.to_s).to eq("Chocolate de untar, Leche, Pan, Salsa de Tomate, Galletas, Sopa, Queso")
     end
 
   end
