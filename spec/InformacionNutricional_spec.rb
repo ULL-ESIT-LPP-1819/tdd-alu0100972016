@@ -7,6 +7,10 @@ RSpec.describe InformacionNutricional do
     @pan = Etiqueta.new("Pan", true, 28, 15.0, 3.8, 1.8, 38.0, 2.5, 3.8, 0.4)
     @queso = Etiqueta.new("Queso", true, 17, 15.0, 13.9, 8.1, 0.6, 0.6, 15.7, 3.15)
     @leche = Etiqueta.new("Leche", true, 4, 197.25, 0.3, 0.2, 5.1, 5.1, 3.9, 0.15)
+    @chocolate_untar = Etiqueta.new("Chocolate de untar", true, 26, 15, 31.6, 11.0, 56.7, 56.8, 6, 0.114)
+    @galletas = Etiqueta.new("Galletas", true, 25, 8.0, 13.5, 6.2, 67.7, 1.4, 10, 1.3)
+    @sopa = Etiqueta.new("Sopa", true, 1, 14, 4.3, 1.6, 71.6, 37.3, 5.5, 1.5)
+    @salsa_tomate = Etiqueta.new("Salsa de Tomate", true, 39, 10, 3.9, 0.4, 9.8, 4.4, 1.3, 0.87)
     @mylist = List.new(@pan)
   end
 
@@ -78,6 +82,20 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.tale.value.name).to eq("Leche")
       expect(@mylist.tale.next).to eq(nil)
     end
+
+    it 'Adding more than one node at a time' do
+      @mylist.insert_n_to_head([@chocolate_untar, @galletas])
+      expect(@mylist.head.prev).to eq(nil)
+      expect(@mylist.head.value.name).to eq("Galletas")
+      expect(@mylist.head.next.value.name).to eq("Chocolate de untar")
+      
+      @mylist.insert_n_to_tale([@sopa, @salsa_tomate])
+      expect(@mylist.tale.prev.value.name).to eq("Sopa")
+      expect(@mylist.tale.value.name).to eq("Salsa de Tomate")
+      expect(@mylist.tale.next).to eq(nil)
+
+    end
+
   end
 
 end
