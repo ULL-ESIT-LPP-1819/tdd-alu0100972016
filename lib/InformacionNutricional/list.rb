@@ -17,7 +17,7 @@ class List
 
   def insert_tale(node)
     new_node = Node.new(node,nil,@tale)
-    @tale.next = new_tnode
+    @tale.next = new_node
     @tale = new_node
   end
 
