@@ -66,9 +66,9 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.head.value.name).to eq("Pan")
       expect(@mylist.head.next).to eq(nil)
 
-      expect(@mylist.tale.prev).to eq(nil)
-      expect(@mylist.tale.value.name).to eq("Pan")
-      expect(@mylist.tale.next).to eq(nil)
+      expect(@mylist.tail.prev).to eq(nil)
+      expect(@mylist.tail.value.name).to eq("Pan")
+      expect(@mylist.tail.next).to eq(nil)
     end
 
     it "Adding 1 node" do
@@ -77,10 +77,10 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.head.value.name).to eq("Queso")
       expect(@mylist.head.next.value.name).to eq("Pan")
 
-      @mylist.insert_tale(@leche)
-      expect(@mylist.tale.prev.value.name).to eq("Pan")
-      expect(@mylist.tale.value.name).to eq("Leche")
-      expect(@mylist.tale.next).to eq(nil)
+      @mylist.insert_tail(@leche)
+      expect(@mylist.tail.prev.value.name).to eq("Pan")
+      expect(@mylist.tail.value.name).to eq("Leche")
+      expect(@mylist.tail.next).to eq(nil)
     end
 
     it "Adding more than one node at a time" do
@@ -89,14 +89,50 @@ RSpec.describe InformacionNutricional do
       expect(@mylist.head.value.name).to eq("Galletas")
       expect(@mylist.head.next.value.name).to eq("Chocolate de untar")
       
-      @mylist.insert_n_to_tale([@sopa, @salsa_tomate])
-      expect(@mylist.tale.prev.value.name).to eq("Sopa")
-      expect(@mylist.tale.value.name).to eq("Salsa de Tomate")
-      expect(@mylist.tale.next).to eq(nil)
+      @mylist.insert_n_to_tail([@sopa, @salsa_tomate])
+      expect(@mylist.tail.prev.value.name).to eq("Sopa")
+      expect(@mylist.tail.value.name).to eq("Salsa de Tomate")
+      expect(@mylist.tail.next).to eq(nil)
     end
 
-    id "Sorting minor to mayor grams of salt" do
-      expect(@mylist.sort_salt.to_s).to eq("Chocolate de untar, Leche, Pan, Salsa de Tomate, Galletas, Sopa, Queso")
+    it "Salt under IR values" do
+      expect(@mylist.clasify_salt).to eq("Galletas: Sí, Chocolate de untar: Sí, Queso: Sí, Pan: Sí, Leche: Sí, Sopa: Sí, Salsa de Tomate: Sí")
+    end
+    
+    it "Has a format" do
+      expect(@mylist.to_s).to eq("Galletas, Chocolate de untar, Queso, Pan, Leche, Sopa, Salsa de Tomate")
+    end
+
+    it "Is empty?" do
+      expect(@mylist.is_empty).to eq(false)
+    end
+
+    it "Has size" do
+      expect(@mylist.size).to eq(7)
+    end
+
+    it "Removing 1 node" do
+      @mylist.remove_head
+      expect(@mylist.head.prev).to eq(nil)
+      expect(@mylist.head.value.name).to eq("Chocolate de untar")
+      expect(@mylist.head.next.value.name).to eq("Queso")
+
+      @mylist.remove_tail
+      expect(@mylist.tail.prev.value.name).to eq("Leche")
+      expect(@mylist.tail.value.name).to eq("Sopa")
+      expect(@mylist.tail.next).to eq(nil)
+    end
+
+    it "Removing more than one node at a time" do
+      @mylist.remove_n_from_head(2)
+      expect(@mylist.head.prev).to eq(nil)
+      expect(@mylist.head.value.name).to eq("Pan")
+      expect(@mylist.head.next.value.name).to eq("Leche")
+      
+      @mylist.remove_n_from_tail(2)
+      expect(@mylist.tail.prev).to eq(nil)
+      expect(@mylist.tail.value.name).to eq("Pan")
+      expect(@mylist.tail.next).to eq(nil)
     end
 
   end
