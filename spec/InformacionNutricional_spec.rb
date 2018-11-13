@@ -11,7 +11,7 @@ RSpec.describe InformacionNutricional do
     @galletas = Etiqueta.new("Galletas", true, 25, 8.0, 13.5, 6.2, 67.7, 1.4, 10, 1.3)
     @sopa = Etiqueta.new("Sopa", true, 1, 14, 4.3, 1.6, 71.6, 37.3, 5.5, 1.5)
     @salsa_tomate = Etiqueta.new("Salsa de Tomate", true, 39, 10, 3.9, 0.4, 9.8, 4.4, 1.3, 0.87)
-    @mylist = List.new(@pan)
+    @mylist = List.new
   end
 
   it "has a version number" do
@@ -62,6 +62,7 @@ RSpec.describe InformacionNutricional do
 
   describe "#List" do
     it "First" do
+      @mylist.insert_head(@pan)
       expect(@mylist.head.prev).to eq(nil)
       expect(@mylist.head.value.name).to eq("Pan")
       expect(@mylist.head.next).to eq(nil)
@@ -96,7 +97,11 @@ RSpec.describe InformacionNutricional do
     end
 
     it "Salt under IR values" do
-      expect(@mylist.clasify_salt).to eq("Galletas: Sí, Chocolate de untar: Sí, Queso: Sí, Pan: Sí, Leche: Sí, Sopa: Sí, Salsa de Tomate: Sí")
+      node = @mylist.head
+      while node != nil
+        expect(6.0 >= node.value.salt).to eq(true)
+        node = node.next
+      end
     end
     
     it "Has a format" do

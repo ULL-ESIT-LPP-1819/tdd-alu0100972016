@@ -2,13 +2,11 @@ Node = Struct.new(:value, :next, :prev)
 
 class List
 
-    include Comparable
     attr_reader :head, :tail, :size
     
-    def initialize (node)
-        @head = Node.new(node,nil,nil)
-        @tail = @head
-        @size = 1
+    def initialize 
+        @tail = @head = nil
+        @size = 0
     end
 
     def is_empty
@@ -26,16 +24,28 @@ class List
     end
     
     def insert_head(node)
-        new_node = Node.new(node,@head,nil)
-        @head.prev = new_node
-        @head = new_node
+        if is_empty
+            new_node = Node.new(node,nil,nil)
+            @head = new_node
+            @tail = @head
+        else
+            new_node = Node.new(node,@head,nil)
+            @head.prev = new_node
+            @head = new_node
+        end
         @size = @size + 1
     end
     
     def insert_tail(node)
-        new_node = Node.new(node,nil,@tail)
-        @tail.next = new_node
-        @tail = new_node
+        if is_empty
+            new_node = Node.new(node,nil,nil)
+            @tail = new_node
+            @head = @tail
+        else
+            new_node = Node.new(node,nil,@tail)
+            @tail.next = new_node
+            @tail = new_node
+        end
         @size = @size + 1
     end
     
@@ -52,20 +62,30 @@ class List
     end
 
     def remove_head
-        @head = @head.next
-        @head.prev = nil
+        if @size == 1
+            @head = nil
+            @tail = @head
+        else
+            @head = @head.next
+            @head.prev = nil
+        end
         @size = @size - 1
     end
     
     def remove_tail
-        @tail = @tail.prev
-        @tail.next = nil
+        if @size == 1
+            @tail = nil
+            @head = @tail
+        else
+            @tail = @tail.prev
+            @tail.next = nil
+        end
         @size = @size - 1
     end
     
     def remove_n_from_head(qty)
         times = 0
-        while times < qty && @size > 0 do
+        while times < qty && @size > 0
             remove_head
             times = times + 1
         end
@@ -73,14 +93,10 @@ class List
 
     def remove_n_from_tail(qty)
         times = 0
-        while times < qty && @size > 0 do
+        while times < qty && @size > 0
             remove_tail
             times = times + 1
         end
-    end
-
-    def <=> (anOther)
-        salt <=> anOther.value.salt
     end
 
     def to_s
@@ -95,23 +111,4 @@ class List
         end
         array
     end
-
-    def clasify_salt
-        array = ""
-        node = @head
-        while node != nil
-            array += "#{node.value.name}:"
-            if 6.0 >= node.value.salt
-                array += " Sí"
-            else 
-                array += " No"
-            end 
-            if node.next != nil
-                array += ", "
-            end
-            node = node.next
-        end
-        array
-    end
-
 end
