@@ -1,5 +1,6 @@
 require 'InformacionNutricional/etiqueta.rb'
 require 'InformacionNutricional/list.rb'
+require 'InformacionNutricional/persona.rb'
 
 RSpec.describe InformacionNutricional do
  
@@ -12,6 +13,7 @@ RSpec.describe InformacionNutricional do
     @sopa = Etiqueta.new("Sopa", true, 1, 14, 4.3, 1.6, 71.6, 37.3, 5.5, 1.5)
     @salsa_tomate = Etiqueta.new("Salsa de Tomate", true, 39, 10, 3.9, 0.4, 9.8, 4.4, 1.3, 0.87)
     @mylist = List.new
+    @p1 = Persona.new("María", 18, 0)
   end
 
   it "has a version number" do
@@ -141,5 +143,22 @@ RSpec.describe InformacionNutricional do
     end
 
   end
-
+  
+  describe "#Persona" do
+    it "has a name" do
+        expect(@p1.nombre).to eq("María")
+    end
+     
+    it "has an age" do
+        expect(@p1.edad).to eq(18)
+    end
+      
+    it "has a sex" do
+        expect(@p1.sexo).to eq("Mujer")
+    end
+      
+    it "has format" do
+        expect(@p1.to_s).to eq("Nombre: María, Edad: 18, Sexo: Mujer")
+    end      
+  end
 end
