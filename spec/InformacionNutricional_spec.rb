@@ -17,9 +17,14 @@ RSpec.describe InformacionNutricional do
     @p1 = Persona.new("María", 18, 0)
     @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc1.calculo_imc
-	@pc1.porcentaje_grasa
-	@pc1.calculo_pliegues
-	@pc1.calculo_rcc
+    @pc1.porcentaje_grasa
+    @pc1.calculo_pliegues
+    @pc1.calculo_rcc
+    @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc3 = Paciente.new("Loli", 43, 0, 79, 1.80, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc5 = Paciente.new("Pedro", 60, 1, 54, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @mylist2 = List.new
 end
 
   it "has a version number" do
@@ -187,6 +192,50 @@ end
       expect(@pc1.to_s).to eq("Nombre: Juan, Edad: 20, Sexo: Hombre, IMC: 25.97, Grasa: 19.56%, Tricipital: 17.5, Bicipital: 8.03, Subescapular: 13.9, Suprailíaco: 17.5, Brazo: 28.95, RCC: 0.75")
     end
 
+  end
+
+  describe "Lista Pacientes" do
+    it "Añadiendo pacientes" do
+        @mylist2.insert_n_to_head([@pc1, @pc2, @pc3, @pc4, @pc5])
+        expect(@mylist2.head.prev).to eq(nil)
+        expect(@mylist2.head.value.nombre).to eq("Pedro")
+        expect(@mylist2.head.next.value.nombre).to eq("Carla")
+    end
+    it "Clasificar por IMC" do
+      node = @mylist2.head
+      imc_bajo = []
+      imc_normal = []
+      imc_obeso = []
+      imc_sobrepeso = []
+      while node != nil
+        node.value.calculo_imc
+        node.value.porcentaje_grasa
+        node.value.calculo_pliegues
+        node.value.calculo_rcc
+        if node.value.imc < 18.5
+            imc_bajo << node.value
+        elsif node.value.imc >= 18.5 &&  node.value.imc <= 24.9
+            imc_normal << node.value
+        elsif node.value.imc >= 25.0 && node.value.imc <= 29.9
+            imc_sobrepeso << node.value
+        else
+            imc_obeso << node.value
+        end
+        node = node.next
+      end
+      imc_bajo.each do |paciente|
+        expect(paciente.imc < 18.5).to eq(true)
+      end
+      imc_normal.each do |paciente|
+        expect(paciente.imc >= 18.5 && paciente.imc <= 24.9).to eq(true)
+      end
+      imc_sobrepeso.each do |paciente|
+        expect(paciente.imc > 25 && paciente.imc <= 29.9).to eq(true)
+      end
+      imc_obeso.each do |paciente|
+        expect(paciente.imc > 30).to eq(true)
+      end
+    end
   end
   
   describe "Clase, tipo y pertenencia a jerarquía" do
