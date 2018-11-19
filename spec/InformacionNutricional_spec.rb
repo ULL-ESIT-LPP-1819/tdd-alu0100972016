@@ -1,6 +1,7 @@
 require 'InformacionNutricional/etiqueta.rb'
 require 'InformacionNutricional/list.rb'
 require 'InformacionNutricional/persona.rb'
+require 'InformacionNutricional/paciente.rb'
 
 RSpec.describe InformacionNutricional do
  
@@ -14,7 +15,12 @@ RSpec.describe InformacionNutricional do
     @salsa_tomate = Etiqueta.new("Salsa de Tomate", true, 39, 10, 3.9, 0.4, 9.8, 4.4, 1.3, 0.87)
     @mylist = List.new
     @p1 = Persona.new("María", 18, 0)
-  end
+    @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc1.calculo_imc
+	@pc1.porcentaje_grasa
+	@pc1.calculo_pliegues
+	@pc1.calculo_rcc
+end
 
   it "has a version number" do
     expect(InformacionNutricional::VERSION).not_to be nil
@@ -163,24 +169,46 @@ RSpec.describe InformacionNutricional do
         expect(@p1.to_s).to eq("Nombre: María, Edad: 18, Sexo: Mujer")
     end      
   end
+
+  describe "#Paciente" do
+    it "has a name" do
+        expect(@pc1.nombre).to eq("Juan")
+    end
+    
+    it "has an age" do
+        expect(@pc1.edad).to eq(20)
+    end
+    
+    it "has a sex" do
+        expect(@pc1.sexo).to eq("Hombre")
+    end
+  
+    it "has format" do
+      expect(@pc1.to_s).to eq("Nombre: Juan, Edad: 20, Sexo: Hombre, IMC: 25.97, Grasa: 19.56%, Tricipital: 17.5, Bicipital: 8.03, Subescapular: 13.9, Suprailíaco: 17.5, Brazo: 28.95, RCC: 0.75")
+    end
+
+  end
   
   describe "Clase, tipo y pertenencia a jerarquía" do
       it "Clase de un objeto" do
           expect(@pan.instance_of? Etiqueta).to eq(true)
           expect(@mylist.instance_of? List).to eq(true)
           expect(@p1.instance_of? Persona).to eq(true)
+          expect(@pc1.instance_of? Paciente).to eq(true)
       end
       
       it "Tipo de un objeto" do
           expect(@pan.respond_to?:name).to eq(true)
           expect(@mylist.respond_to?:head).to eq(true)
           expect(@p1.respond_to?:nombre).to eq(true)
+          expect(@pc1.respond_to?:peso).to eq(true)
       end
       
       it "Jerarquía" do
           expect(@pan.is_a? Object).to eq(true)
           expect(@mylist.is_a? Object).to eq(true)
           expect(@p1.is_a? Object).to eq(true)
+          expect(@pc1.is_a? Persona).to eq(true)
       end   
   end
 end
