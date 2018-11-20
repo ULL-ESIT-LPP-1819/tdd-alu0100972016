@@ -7,10 +7,11 @@ class Paciente < Persona
         @weight, @height, @waist, @hip = weight, height, waist, hip
 		@pliegues = [tricipital, bicipital, subescapular, suprailiaco]
 		@brazo = brazo
-    end
+	end
+	
     def calculo_imc
 		@imc = (@weight/@height**2).round(2)
-
+		puts "#{@imc}"
 	end
 
 	def porcentaje_fat

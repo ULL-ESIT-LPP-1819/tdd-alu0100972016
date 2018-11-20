@@ -23,7 +23,7 @@ RSpec.describe InformacionNutricional do
     @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc3 = Paciente.new("Loli", 43, 0, 79, 1.80, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc5 = Paciente.new("Pedro", 60, 1, 54, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc5 = Paciente.new("Pedro", 60, 1, 50, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @mylist2 = List.new
 end
 
@@ -209,9 +209,6 @@ end
       imc_sobrepeso = []
       while node != nil
         node.value.calculo_imc
-        node.value.porcentaje_fat
-        node.value.calculo_pliegues
-        node.value.calculo_rcc
         if node.value.imc < 18.5
             imc_bajo << node.value
         elsif node.value.imc >= 18.5 &&  node.value.imc <= 24.9
@@ -244,6 +241,16 @@ end
           expect(@mylist.instance_of? List).to eq(true)
           expect(@p1.instance_of? Persona).to eq(true)
           expect(@pc1.instance_of? Paciente).to eq(true)
+
+          expect(@pan.class).to eq(Etiqueta)
+          expect(@mylist.class).to eq(List)
+          expect(@p1.class).to eq(Persona)
+          expect(@pc1.class).to eq(Paciente)
+
+          expect(Etiqueta.superclass).to eq(Object)
+          expect(List.superclass).to eq(Object)
+          expect(Persona.superclass).to eq(Object)
+          expect(Paciente.superclass).to eq(Persona)
       end
       
       it "Tipo de un objeto" do
