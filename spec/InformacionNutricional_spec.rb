@@ -17,7 +17,7 @@ RSpec.describe InformacionNutricional do
     @p1 = Persona.new("María", 18, 0)
     @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc1.calculo_imc
-    @pc1.porcentaje_grasa
+    @pc1.porcentaje_fat
     @pc1.calculo_pliegues
     @pc1.calculo_rcc
     @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
@@ -159,15 +159,15 @@ end
   
   describe "#Persona" do
     it "has a name" do
-        expect(@p1.nombre).to eq("María")
+        expect(@p1.name).to eq("María")
     end
      
     it "has an age" do
-        expect(@p1.edad).to eq(18)
+        expect(@p1.age).to eq(18)
     end
       
     it "has a sex" do
-        expect(@p1.sexo).to eq("Mujer")
+        expect(@p1.sex).to eq("Mujer")
     end
       
     it "has format" do
@@ -177,15 +177,15 @@ end
 
   describe "#Paciente" do
     it "has a name" do
-        expect(@pc1.nombre).to eq("Juan")
+        expect(@pc1.name).to eq("Juan")
     end
     
     it "has an age" do
-        expect(@pc1.edad).to eq(20)
+        expect(@pc1.age).to eq(20)
     end
     
     it "has a sex" do
-        expect(@pc1.sexo).to eq("Hombre")
+        expect(@pc1.sex).to eq("Hombre")
     end
   
     it "has format" do
@@ -198,8 +198,8 @@ end
     it "Añadiendo pacientes" do
         @mylist2.insert_n_to_head([@pc1, @pc2, @pc3, @pc4, @pc5])
         expect(@mylist2.head.prev).to eq(nil)
-        expect(@mylist2.head.value.nombre).to eq("Pedro")
-        expect(@mylist2.head.next.value.nombre).to eq("Carla")
+        expect(@mylist2.head.value.name).to eq("Pedro")
+        expect(@mylist2.head.next.value.name).to eq("Carla")
     end
     it "Clasificar por IMC" do
       node = @mylist2.head
@@ -209,7 +209,7 @@ end
       imc_sobrepeso = []
       while node != nil
         node.value.calculo_imc
-        node.value.porcentaje_grasa
+        node.value.porcentaje_fat
         node.value.calculo_pliegues
         node.value.calculo_rcc
         if node.value.imc < 18.5
@@ -249,8 +249,8 @@ end
       it "Tipo de un objeto" do
           expect(@pan.respond_to?:name).to eq(true)
           expect(@mylist.respond_to?:head).to eq(true)
-          expect(@p1.respond_to?:nombre).to eq(true)
-          expect(@pc1.respond_to?:peso).to eq(true)
+          expect(@p1.respond_to?:name).to eq(true)
+          expect(@pc1.respond_to?:weight).to eq(true)
       end
       
       it "Jerarquía" do

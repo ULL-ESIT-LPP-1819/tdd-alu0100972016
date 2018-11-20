@@ -1,14 +1,14 @@
 class Persona
     
-    attr_accessor :nombre, :edad
+    attr_accessor :name, :age
     
-    def initialize(nombre, edad, sexo)
-        @nombre, @edad, @sexo = nombre, edad, sexo
+    def initialize(name, age, sex)
+        @name, @age, @sex = name, age, sex
     end
     
-    def sexo
+    def sex
         array = ""
-        if @sexo == 1
+        if @sex == 1
             array = "Hombre"
         else
             array = "Mujer"
@@ -17,6 +17,6 @@ class Persona
     end
     
     def to_s
-        "Nombre: #{@nombre}, Edad: #{@edad}, Sexo: #{sexo}"
+        "Nombre: #{@name}, Edad: #{@age}, Sexo: #{sex}"
     end
 end

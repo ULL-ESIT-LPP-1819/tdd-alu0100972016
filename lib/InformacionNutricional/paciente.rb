@@ -1,20 +1,20 @@
 require 'InformacionNutricional/persona.rb'
 
 class Paciente < Persona
-    attr_accessor :nombre, :peso, :altura, :edad, :cintura, :cadera, :imc, :rcc, :grasa, :pliegues, :brazo, :medias, :media_brazo, :media_cadera, :media_cintura
-	def initialize(nombre, edad, sexo, peso, altura, cintura, cadera, tricipital, bicipital, subescapular, suprailiaco, brazo)
-        super(nombre, edad, sexo)
-        @peso, @altura, @cintura, @cadera = peso, altura, cintura, cadera
+    attr_accessor :name, :weight, :height, :age, :waist, :hip, :imc, :rcc, :fat, :pliegues, :brazo, :medias, :media_brazo, :media_hip, :media_waist
+	def initialize(name, age, sexo, weight, height, waist, hip, tricipital, bicipital, subescapular, suprailiaco, brazo)
+        super(name, age, sexo)
+        @weight, @height, @waist, @hip = weight, height, waist, hip
 		@pliegues = [tricipital, bicipital, subescapular, suprailiaco]
 		@brazo = brazo
     end
     def calculo_imc
-		@imc = (@peso/@altura**2).round(2)
+		@imc = (@weight/@height**2).round(2)
 
 	end
 
-	def porcentaje_grasa
-		@grasa = (1.2 * @imc + 0.23 * @edad - 10.8 * @sexo - 5.4).round(2)
+	def porcentaje_fat
+		@fat = (1.2 * @imc + 0.23 * @age - 10.8 * @sex - 5.4).round(2)
 	end
 
 	def calculo_pliegues
@@ -37,20 +37,20 @@ class Paciente < Persona
 
 	def calculo_rcc
 		suma = 0
-		@cintura.each do |elemento|
+		@waist.each do |elemento|
 			suma += elemento
 		end
-		@media_cintura = suma/@cintura.length
+		@media_waist = suma/@waist.length
 		suma = 0
-		@cadera.each do |elemento|
+		@hip.each do |elemento|
 			suma += elemento
 		end
-		@media_cadera = suma/@cadera.length
-		@rcc = (@media_cintura/@media_cadera).round(2)
+		@media_hip = suma/@hip.length
+		@rcc = (@media_waist/@media_hip).round(2)
     end
     
     def to_s
         array = super()
-        array += ", IMC: #{@imc}, Grasa: #{@grasa}%, Tricipital: #{@medias[0]}, Bicipital: #{@medias[1]}, Subescapular: #{@medias[2]}, Suprailíaco: #{@medias[3]}, Brazo: #{@media_brazo}, RCC: #{@rcc}"
+        array += ", IMC: #{@imc}, Grasa: #{@fat}%, Tricipital: #{@medias[0]}, Bicipital: #{@medias[1]}, Subescapular: #{@medias[2]}, Suprailíaco: #{@medias[3]}, Brazo: #{@media_brazo}, RCC: #{@rcc}"
     end
 end
