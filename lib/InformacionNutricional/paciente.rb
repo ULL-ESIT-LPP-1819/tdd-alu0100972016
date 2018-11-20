@@ -1,9 +1,9 @@
 require 'InformacionNutricional/persona.rb'
 
 class Paciente < Persona
-    attr_accessor :name, :weight, :height, :age, :waist, :hip, :imc, :rcc, :fat, :pliegues, :brazo, :medias, :media_brazo, :media_hip, :media_waist
+    attr_reader :name, :weight, :height, :age, :waist, :hip, :imc, :rcc, :fat, :pliegues, :brazo, :medias, :media_brazo, :media_hip, :media_waist
 	def initialize(name, age, sexo, weight, height, waist, hip, tricipital, bicipital, subescapular, suprailiaco, brazo)
-        super(name, age, sexo)
+		super(name, age, sexo)
         @weight, @height, @waist, @hip = weight, height, waist, hip
 		@pliegues = [tricipital, bicipital, subescapular, suprailiaco]
 		@brazo = brazo

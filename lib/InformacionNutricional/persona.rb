@@ -1,6 +1,6 @@
 class Persona
     
-    attr_accessor :name, :age
+    attr_reader :name, :age
     
     def initialize(name, age, sex)
         @name, @age, @sex = name, age, sex
