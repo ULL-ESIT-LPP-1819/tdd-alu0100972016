@@ -16,10 +16,6 @@ RSpec.describe InformacionNutricional do
     @mylist = List.new
     @p1 = Persona.new("María", 18, 0)
     @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc1.calculo_imc
-    @pc1.porcentaje_fat
-    @pc1.calculo_pliegues
-    @pc1.calculo_rcc
     @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc3 = Paciente.new("Loli", 43, 0, 79, 1.80, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
@@ -189,6 +185,10 @@ end
     end
   
     it "has format" do
+      @pc1.calculo_imc
+      @pc1.porcentaje_fat
+      @pc1.calculo_pliegues
+      @pc1.calculo_rcc
       expect(@pc1.to_s).to eq("Nombre: Juan, Edad: 20, Sexo: Hombre, IMC: 25.97, Grasa: 19.56%, Tricipital: 17.5, Bicipital: 8.03, Subescapular: 13.9, Suprailíaco: 17.5, Brazo: 28.95, RCC: 0.75")
     end
 
