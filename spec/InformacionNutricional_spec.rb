@@ -201,6 +201,7 @@ end
         expect(@mylist2.head.value.name).to eq("Pedro")
         expect(@mylist2.head.next.value.name).to eq("Carla")
     end
+    
     it "Clasificar por IMC" do
       node = @mylist2.head
       imc_bajo = []
