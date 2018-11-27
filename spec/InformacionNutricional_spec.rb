@@ -268,4 +268,14 @@ end
           expect(@pc1.is_a? Persona).to eq(true)
       end   
   end
+
+  describe "Comparable y Enumerable" do
+    it "Comparable Etiqueta" do
+        expect(@pan < @queso).to eq(true)
+        expect(@pan <= @queso).to eq(true)
+        expect(@pan > @queso).to eq(false)
+        expect(@pan >= @queso).to eq(false)
+        expect(@pan == @queso).to eq(false)
+    end
+  end
 end
