@@ -16,7 +16,7 @@ RSpec.describe InformacionNutricional do
     @mylist = List.new
     @p1 = Persona.new("María", 18, 0)
     @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc3 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc3 = Paciente.new("Loli", 43, 0, 79, 1.80, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
     @pc5 = Paciente.new("Pedro", 60, 1, 50, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
@@ -196,7 +196,7 @@ end
 
   describe "Lista Pacientes" do
     it "Añadiendo pacientes" do
-        @mylist2.insert_n_to_head([@pc1, @pc2, @pc3, @pc4, @pc5])
+        @mylist2.insert_n_to_head([@pc1, @pc3, @pc3, @pc4, @pc5])
         expect(@mylist2.head.prev).to eq(nil)
         expect(@mylist2.head.value.name).to eq("Pedro")
         expect(@mylist2.head.next.value.name).to eq("Carla")
@@ -276,6 +276,14 @@ end
         expect(@pan > @queso).to eq(false)
         expect(@pan >= @queso).to eq(false)
         expect(@pan == @queso).to eq(false)
+    end
+
+    it "Comparable Paciente" do
+        expect(@pc1 < @pc3).to eq(false)
+        expect(@pc1 <= @pc3).to eq(false)
+        expect(@pc1 > @pc3).to eq(true)
+        expect(@pc1 >= @pc3).to eq(true)
+        expect(@pc1 == @pc3).to eq(false)
     end
   end
 end

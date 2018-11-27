@@ -1,6 +1,7 @@
 require 'InformacionNutricional/persona.rb'
 
 class Paciente < Persona
+	include Comparable
     attr_reader :name, :weight, :height, :age, :waist, :hip, :imc, :rcc, :fat, :pliegues, :brazo, :medias, :media_brazo, :media_hip, :media_waist
 	def initialize(name, age, sexo, weight, height, waist, hip, tricipital, bicipital, subescapular, suprailiaco, brazo)
 		super(name, age, sexo)
@@ -11,7 +12,6 @@ class Paciente < Persona
 	
     def calculo_imc
 		@imc = (@weight/@height**2).round(2)
-		puts "#{@imc}"
 	end
 
 	def porcentaje_fat
@@ -53,5 +53,15 @@ class Paciente < Persona
     def to_s
         array = super()
         array += ", IMC: #{@imc}, Grasa: #{@fat}%, Tricipital: #{@medias[0]}, Bicipital: #{@medias[1]}, Subescapular: #{@medias[2]}, Suprailíaco: #{@medias[3]}, Brazo: #{@media_brazo}, RCC: #{@rcc}"
-    end
+	end
+	
+	def <=> (other)
+		return nil unless other.is_a?Paciente
+		calculo_imc <=> other.calculo_imc
+	end
+
+	def == (other)
+		return nil unless other.is_a?Paciente
+		(@name == other.name) && (calculo_imc == other.calculo_imc) && (calculo_rcc == other.calculo_rcc)
+	end
 end
