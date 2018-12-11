@@ -302,6 +302,7 @@ end
         expect(@pc4.nivel_actividad).to eq(0.27)
         expect(@pc5.nivel_actividad).to eq(0.12)
         end
+
     it "GET" do
         expect(@pc1.gasto_energetico).to eq(565.95)
         expect(@pc2.gasto_energetico).to eq(379.5)
@@ -309,5 +310,45 @@ end
         expect(@pc4.gasto_energetico).to eq(690.57)
         expect(@pc5.gasto_energetico).to eq(263.06)
     end
+
+    it "Menus" do
+        @kcal_menus = []
+        @menu1 = [@salsa_tomate, @pan]
+        @menu2 = [@galletas, @leche, @salsa_tomate]
+        @menu3 = [@sopa]
+        @menu4 = [@sopa, @queso, @salsa_tomate, @leche]
+        @menu5 = [@galletas, @chocolate_untar]
+        @menu6 = [@pan, @chocolate_untar]
+        @menus = [@menu1, @menu2, @menu3, @menu4, @menu5, @menu6]
+        @personas = [@pc1, @pc2, @pc3, @pc4, @pc5]
+        @get = []
+        @asociacion = []
+        
+        @get = @personas.collect {|paciente| paciente.get}
+
+        @menus.map do |menu|
+            unless @kcal_menus.include? [menu, menu.collect{|comida| comida.calculate_calories;}.reduce(:+).round(2)]
+                @kcal_menus << [menu, menu.collect{|comida| comida.calculate_calories;}.reduce(:+).round(2)]
+            end
+        end  
+
+        @get.map do |paciente| 
+            @asociacion << [paciente, @kcal_menus.select{ |menu, kcal| kcal <= (paciente * 1.1) && kcal >= (paciente * 0.9)}]
+        end
+
+        @asociacion.map do |paciente, menus|
+            @personas.collect{|pc| if paciente == pc.get; puts "#{pc.name.upcase}:"; end}
+            menus.map do |menu, kcal|
+                @kcal_menus.collect do |menu_org, kcal_org|
+                    if menu == menu_org
+                        puts "**************************************************" 
+                        puts "-Menu: "
+                        menu_org.map{ |alimento| puts "     * #{alimento.name}"}                      
+                    end 
+                end
+                puts "**************************************************"
+            end
+        end
+    end        
   end
 end

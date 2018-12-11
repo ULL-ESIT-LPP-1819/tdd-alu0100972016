@@ -19,8 +19,8 @@ class Etiqueta
 
 	#Función que gendetermina las kilocalorías y los kilojulios de  los alimentos
 	def calculate_calories
-		@kcal = ((@fats * 9) + (@carbs * 4) + (@protein * 4) + (@salt * 6)).round(2)
 		@kj = ((@fats * 37) + (@carbs * 17) + (@protein * 17) + (@salt * 28)).round(2)
+		@kcal = ((@fats * 9) + (@carbs * 4) + (@protein * 4) + (@salt * 6)).round(2)
 	end
 
 	#Override del to_s
@@ -31,7 +31,7 @@ class Etiqueta
 		end
 		"#{@name.upcase}#{s}: Por 100g - IR; VALOR ENERGETICO: #{@kcal} kcal/#{@kj} kJ - 2000 kcal/8400 kJ; GRASAS: #{@fats}g - 70g; SATURADAS: #{@s_fats}g - 20g; CARBOHIDRATOS: #{@carbs}g - 260g; AZUCARES: #{@sugar}g - 90g; PROTEINAS: #{@protein}g - 50g; SAL: #{@salt}g - 6g;"
 	end
-	
+
 	#Se define para incluir el mixin Comparable
 	#Se toma como valor para la comparación los kJ
 	#(Valor que devuelve la función calculate_calories)
