@@ -13,14 +13,14 @@ class Paciente < Persona
 	include Comparable
 
 	#Getters de las variables de instancia
-    attr_reader :name, :weight, :height, :age, :waist, :hip, :imc, :rcc, :fat, :pliegues, :brazo, :medias, :media_brazo, :media_hip, :media_waist
+    attr_reader :name, :weight, :height, :age, :waist, :hip, :imc, :rcc, :fat, :pliegues, :brazo, :medias, :media_brazo, :media_hip, :media_waist, :nivel_act_fis, :get
 	
 	#Se genera el objeto con los datos proporcionados
-	def initialize(name, age, sexo, weight, height, waist, hip, tricipital, bicipital, subescapular, suprailiaco, brazo)
+	def initialize(name, age, sexo, weight, height, waist, hip, tricipital, bicipital, subescapular, suprailiaco, brazo, nivel_act_fis)
 		super(name, age, sexo)
         @weight, @height, @waist, @hip = weight, height, waist, hip
 		@pliegues = [tricipital, bicipital, subescapular, suprailiaco]
-		@brazo = brazo
+		@brazo, @nivel_act_fis = brazo, nivel_act_fis
 	end
 	
 	#Devuelve el imc del paciente
@@ -67,6 +67,33 @@ class Paciente < Persona
 		@rcc = (@media_waist/@media_hip).round(2)
     end
 	
+	#Devuelve el nivel de actividad física
+	def nivel_actividad
+		case @nivel_act_fis
+		when 1
+		  @nivel_act_fis = 0.0
+		when 2
+		  @nivel_act_fis = 0.12
+		when 3
+		  @nivel_act_fis = 0.27
+		when 4
+		  @nivel_act_fis = 0.54
+		end
+	end
+
+	#Devuelve el gasto energético total
+	def gasto_energetico
+		basal = (10 * @weight) + (6.25 * @height) - (5 * @age)
+		if sex == 0
+			basal -= 161
+		else
+			basal += 5
+		end
+		termogeno = basal * 0.10
+		actividad = basal * @nivel_act_fis
+		@get = (basal + termogeno + actividad).round(2)
+	end
+
 	#Override del to_s
     def to_s
         array = super()

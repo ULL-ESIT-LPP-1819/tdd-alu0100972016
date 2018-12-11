@@ -15,11 +15,11 @@ RSpec.describe InformacionNutricional do
     @salsa_tomate = Etiqueta.new("Salsa de Tomate", true, 39, 10, 3.9, 0.4, 9.8, 4.4, 1.3, 0.87)
     @mylist = List.new
     @p1 = Persona.new("María", 18, 0)
-    @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc3 = Paciente.new("Loli", 43, 0, 79, 1.80, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
-    @pc5 = Paciente.new("Pedro", 60, 1, 50, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9] )
+    @pc1 = Paciente.new("Juan", 20, 1, 60, 1.52, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 1 )
+    @pc2 = Paciente.new("Pepe", 50, 1, 58, 1.60, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 1 )
+    @pc3 = Paciente.new("Loli", 43, 0, 79, 1.80, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 4 )
+    @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 3 )
+    @pc5 = Paciente.new("Pedro", 60, 1, 50, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 2 )
     @mylist2 = List.new
 end
 
@@ -291,6 +291,23 @@ end
         expect(@mylist2.min).to eq(@pc5)
         expect(@mylist2.max).to eq(@pc4)
         expect(@mylist2.sort).to eq([@pc5, @pc2, @pc3, @pc1, @pc4])
+    end
+  end
+
+  describe "Menus pacientes" do
+    it "Nivel actividad física" do
+        expect(@pc1.nivel_actividad).to eq(0.0)
+        expect(@pc2.nivel_actividad).to eq(0.0)
+        expect(@pc3.nivel_actividad).to eq(0.54)
+        expect(@pc4.nivel_actividad).to eq(0.27)
+        expect(@pc5.nivel_actividad).to eq(0.12)
+        end
+    it "GET" do
+        expect(@pc1.gasto_energetico).to eq(565.95)
+        expect(@pc2.gasto_energetico).to eq(379.5)
+        expect(@pc3.gasto_energetico).to eq(969.65)
+        expect(@pc4.gasto_energetico).to eq(690.57)
+        expect(@pc5.gasto_energetico).to eq(263.06)
     end
   end
 end
