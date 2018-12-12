@@ -311,7 +311,7 @@ end
         expect(@pc5.gasto_energetico).to eq(263.06)
     end
 
-    it "Menus" do
+    it "Asociación de menus" do
         @kcal_menus = []
         @menu1 = [@salsa_tomate, @pan]
         @menu2 = [@galletas, @leche, @salsa_tomate]
