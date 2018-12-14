@@ -319,7 +319,7 @@ end
         @menu4 = [@sopa, @queso, @salsa_tomate, @leche]
         @menu5 = [@galletas, @chocolate_untar]
         @menu6 = [@pan, @chocolate_untar]
-        @menus = [@menu1, @menu2, @menu3, @menu4, @menu5, @menu6]
+        @menus = [@menu1, @menu2, @menu3, @menu4, @menu5]
         @personas = [@pc1, @pc2, @pc3, @pc4, @pc5]
         @get = []
         @asociacion = []
@@ -335,6 +335,8 @@ end
         @get.map do |paciente| 
             @asociacion << [paciente, @kcal_menus.select{ |menu, kcal| kcal <= (paciente * 1.1) && kcal >= (paciente * 0.9)}]
         end
+
+        expect(@asociacion).to eq([[565.95, [@kcal_menus[1]]], [379.5, [@kcal_menus[2]]], [969.65, [@kcal_menus[4]]], [690.57, [@kcal_menus[3]]], [263.06, [@kcal_menus[0]]]])
 
         @asociacion.map do |paciente, menus|
             @personas.collect{|pc| if paciente == pc.get; puts "#{pc.name.upcase}:"; end}
