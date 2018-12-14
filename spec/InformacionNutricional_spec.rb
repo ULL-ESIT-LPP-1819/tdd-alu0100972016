@@ -336,7 +336,6 @@ end
             @asociacion << [paciente, @kcal_menus.select{ |menu, kcal| kcal <= (paciente * 1.1) && kcal >= (paciente * 0.9)}]
         end
 
-        print @asociacion
         expect(@asociacion).to eq([[565.95, [@kcal_menus[1]]], [379.5, [@kcal_menus[2]]], [969.65, [@kcal_menus[4]]], [690.57, [@kcal_menus[3], @kcal_menus[5]]], [263.06, [@kcal_menus[0]]]])
 
         @asociacion.map do |paciente, menus|
