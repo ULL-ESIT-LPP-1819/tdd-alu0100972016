@@ -105,7 +105,7 @@ class Paciente < Persona
 	#(Valor que devuelve la función calculo_imc)
 	def <=> (other)
 		return nil unless other.is_a?Paciente
-		calculo_imc <=> other.calculo_imc
+		gasto_energetico <=> other.gasto_energetico
 	end
 
 	#Override del ==

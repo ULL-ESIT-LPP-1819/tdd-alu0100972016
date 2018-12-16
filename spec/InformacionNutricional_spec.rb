@@ -21,6 +21,16 @@ RSpec.describe InformacionNutricional do
     @pc4 = Paciente.new("Carla", 36, 0, 67, 1.45, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 3 )
     @pc5 = Paciente.new("Pedro", 60, 1, 50, 1.70, [60.0, 60.1], [80.0, 80.2], [17.4, 17.6, 17.5], [8.0, 8.1, 8.0], [14.0, 13.9, 13.8], [17.5, 17.6, 17.4], [29.0, 28.9], 2 )
     @mylist2 = List.new
+    @menu1 = [@salsa_tomate, @pan]
+    @menu2 = [@galletas, @leche, @salsa_tomate]
+    @menu3 = [@sopa]
+    @menu4 = [@sopa, @queso, @salsa_tomate, @leche]
+    @menu5 = [@galletas, @chocolate_untar]
+    @menu6 = [@pan, @chocolate_untar]
+    @menu7 = [@sopa, @pan, @queso]
+    @menu8 = [@galletas, @sopa]
+    @menu9 = [@chocolate_untar, @queso]
+    @menu10 = [@salsa_tomate, @pan, @queso]
 end
 
   it "has a version number" do
@@ -268,6 +278,7 @@ end
       end   
   end
 
+=begin 
   describe "Comparable y Enumerable" do
     it "Comparable Etiqueta" do
         expect(@pan < @queso).to eq(true)
@@ -293,6 +304,7 @@ end
         expect(@mylist2.sort).to eq([@pc5, @pc2, @pc3, @pc1, @pc4])
     end
   end
+=end
 
   describe "Menus pacientes" do
     it "Nivel actividad física" do
@@ -313,12 +325,6 @@ end
 
     it "Asociación de menus" do
         @kcal_menus = []
-        @menu1 = [@salsa_tomate, @pan]
-        @menu2 = [@galletas, @leche, @salsa_tomate]
-        @menu3 = [@sopa]
-        @menu4 = [@sopa, @queso, @salsa_tomate, @leche]
-        @menu5 = [@galletas, @chocolate_untar]
-        @menu6 = [@pan, @chocolate_untar]
         @menus = [@menu1, @menu2, @menu3, @menu4, @menu5, @menu6]
         @personas = [@pc1, @pc2, @pc3, @pc4, @pc5]
         @get = []
@@ -353,4 +359,6 @@ end
         end
     end        
   end
+
+  
 end

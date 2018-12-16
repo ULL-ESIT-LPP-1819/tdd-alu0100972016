@@ -133,11 +133,30 @@ class List
     #Se define como una iteración c/u de los calores de los nodos
     def each
         aux = @head
-        sz = size
+        sz = @size
         for i in (1..sz)
             yield aux.value
             aux = aux.next
         end
+    end
+
+    #Ordena la lista con for
+    def sort_for
+        sorted = [@head.value]
+        aux = @head
+        sz = @size
+        for i in (1...sz)
+            aux = aux.next
+            for j in (0..sorted.size)
+                if (j == sorted.size)
+                    sorted.push(aux.value)
+                elsif (aux.value < sorted[j])
+                    sorted.insert(j, aux.value)
+                    break
+                end
+            end
+        end
+        return sorted
     end
 
 end
