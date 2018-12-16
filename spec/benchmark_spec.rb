@@ -48,5 +48,9 @@ RSpec.describe "Benchmark" do
         it "ordenar lista con for" do
             expect(@pacientes.sort_for).to eq([@pc9, @pc6, @pc8, @pc5, @pc10, @pc2, @pc7, @pc1, @pc4, @pc3])
         end
+
+        it "ordenar lista con each" do
+            expect(@pacientes.sort_each).to eq([@pc9, @pc6, @pc8, @pc5, @pc10, @pc2, @pc7, @pc1, @pc4, @pc3])
+        end
     end
 end

@@ -159,4 +159,28 @@ class List
         return sorted
     end
 
+    #Oredena la lista con each
+    def sort_each
+        sorted = [@head.value]
+        self.each_with_index do |x, pos_x|
+            if (pos_x != 0)
+                sorted.each_with_index do |y, pos_y|
+                    if (pos_y == sorted.size - 1)
+                        if (x < y)
+                            sorted.insert(pos_y, x)
+                            break
+                        else
+                            sorted.push(x)
+                            break
+                        end
+                    elsif (x < y)
+                        sorted.insert(pos_y, x)
+                        break
+                    end
+                end
+            end
+        end
+        return sorted
+    end
+
 end
