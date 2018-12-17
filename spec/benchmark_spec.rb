@@ -1,6 +1,8 @@
 require 'InformacionNutricional/etiqueta.rb'
 require 'InformacionNutricional/list.rb'
 require 'InformacionNutricional/paciente.rb'
+require 'benchmark'
+include Benchmark
 
 RSpec.describe "Benchmark" do
  
@@ -123,6 +125,18 @@ RSpec.describe "Benchmark" do
                 menu.kcal_each
             end
             expect(@menus_kcal.sort).to eq([288.52, 356.1, 497.72, 564.42, 689.62, 739.68, 745.08, 769.1, 796.2, 975.98])
+        end
+
+        it "Benchmark" do
+            Benchmark.benchmark(CAPTION, 7, FORMAT, ">total:", ">avg:") do |x|
+                tfl = x.report("for list:")     { vec = @pacientes.sort_for }
+                tfa = x.report("for array:")    { vec2 = @menus.sort_for }
+                tel = x.report("each list:")    { vec3 = @pacientes.sort_each }
+                tea = x.report("each array:")   { vec4 = @menus.sort_each }
+                tsl = x.report("sort list:")    { vec5 = @pacientes.sort }
+                tsa = x.report("sort array:")   { vec6 = @menus.map{ |menu| menu.kcal_each }.sort }
+                [tfl+tfa+tel+tea+tsl+tsa, (tfl+tfa+tel+tea+tsl+tsa)/6]
+            end
         end
     end
 end
