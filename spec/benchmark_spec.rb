@@ -82,6 +82,38 @@ RSpec.describe "Benchmark" do
             expect(@pacientes.sort_each).to eq([@pc9, @pc6, @pc8, @pc5, @pc10, @pc2, @pc7, @pc1, @pc4, @pc3])
         end
 
+        it "ordenar array con each" do
+            class Array
+                def kcal_each
+                    self.collect{|comida| comida.calculate_calories;}.reduce(:+).round(2)
+                end
+                def sort_each
+                    sorted = [self[0]]
+                    self.each_with_index do |x, pos_x|
+                        if (pos_x != 0)
+                            sorted.each_with_index do |y, pos_y|
+                                if (pos_y == sorted.size-1)
+                                    if (x.kcal_each < y.kcal_each)
+                                        sorted.insert(pos_y, x)
+                                        break
+                                    else
+                                        sorted.push(x)
+                                        break
+                                    end
+                                elsif (x.kcal_each < y.kcal_each)
+                                    sorted.insert(pos_y, x)
+                                    break
+                                end
+                            end
+                        end
+                    end
+                    return sorted
+                end
+            end
+
+            expect(@menus.sort_each).to eq([@menu1, @menu3, @menu10, @menu2, @menu4, @menu6, @menu9, @menu7, @menu8, @menu5])
+        end
+
         it "ordenar lista con sort" do
             expect(@pacientes.sort).to eq([@pc9, @pc6, @pc8, @pc5, @pc10, @pc2, @pc7, @pc1, @pc4, @pc3])
         end
