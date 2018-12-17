@@ -117,5 +117,12 @@ RSpec.describe "Benchmark" do
         it "ordenar lista con sort" do
             expect(@pacientes.sort).to eq([@pc9, @pc6, @pc8, @pc5, @pc10, @pc2, @pc7, @pc1, @pc4, @pc3])
         end
+
+        it "ordenar array con sort" do
+            @menus_kcal = @menus.map do |menu|
+                menu.kcal_each
+            end
+            expect(@menus_kcal.sort).to eq([288.52, 356.1, 497.72, 564.42, 689.62, 739.68, 745.08, 769.1, 796.2, 975.98])
+        end
     end
 end
