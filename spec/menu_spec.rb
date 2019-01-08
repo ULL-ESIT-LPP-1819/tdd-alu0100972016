@@ -1,8 +1,12 @@
 require 'InformacionNutricional/menu.rb'
 
 RSpec.describe "Menu" do
- 
-    before :all do
+
+    it "has a version number" do
+        expect(InformacionNutricional::VERSION).not_to be nil
+    end
+
+    it "inicializar menu" do
         @menu = Menu.new("Lunes") do
             titulo      "Bajo en calorías"
             ingesta     :min => 30, 
@@ -52,13 +56,6 @@ RSpec.describe "Menu" do
                         :proteinas => 3.1,
                         :sal => 0.13
         end
-    end
-
-    it "has a version number" do
-        expect(InformacionNutricional::VERSION).not_to be nil
-    end
-
-    it "has a to_s" do
         puts @menu.to_s
     end
 
