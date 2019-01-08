@@ -4,7 +4,7 @@ RSpec.describe "Menu" do
  
     before :all do
         menu = Menu.new("Lunes") do
-            titulo      "Bajo en calor ́ıas",
+            titulo      "Bajo en calorías",
             ingesta     :min => 30,             :max => 35
             desayuno    :descripcion => "Pan de trigo integral",
                         :porcion => "1 rodaja",
@@ -15,7 +15,7 @@ RSpec.describe "Menu" do
                         :fibra => 2.3,
                         :sal => 0.06
             desayuno    :descripcion => "Actimel",
-                        :porcion => "1 porci ́on",
+                        :porcion => "1 porción",
                         :gramos => 100,
                         :grasas =>  3.4,
                         :carbohidratos => 4.4,
@@ -30,7 +30,7 @@ RSpec.describe "Menu" do
                         :fibra => 1.4,
                         :sal => 0.04
             almuerzo    "Lentejas",
-                        :porcion => "1/2 cuchar ́on",
+                        :porcion => "1/2 cucharón",
                         :grasas => 0.4,
                         :carbohidratos => 20.0,
                         :proteinas => 9.0,
@@ -54,7 +54,7 @@ RSpec.describe "Menu" do
     end
 
     it "has a version number" do
-        expect(InformacionNutricional           :       :VERSION).not_to be nil
+        expect(InformacionNutricional::VERSION).not_to be nil
     end
 
 end
