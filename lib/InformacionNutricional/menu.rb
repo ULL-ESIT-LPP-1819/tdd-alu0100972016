@@ -2,9 +2,9 @@ class Menu
     
     attr_accessor :titulo, :ingesta, :desayuno, :almuerzo, :cena
     
-    def initialize(titulo, ingesta, &block)
+    def initialize(titulo, &block)
         @titulo = titulo
-        @ingesta = ingesta
+        @ingesta = []
         @desayuno = []
         @almuerzo = []
         @cena = []

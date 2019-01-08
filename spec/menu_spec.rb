@@ -5,7 +5,7 @@ RSpec.describe "Menu" do
     before :all do
         menu = Menu.new("Lunes") do
             titulo      "Bajo en calorías",
-            ingesta     :min => 30,             :max => 35
+            ingesta     :min => 30, :max => 35
             desayuno    :descripcion => "Pan de trigo integral",
                         :porcion => "1 rodaja",
                         :gramos => 100,
