@@ -3,9 +3,10 @@ require 'InformacionNutricional/menu.rb'
 RSpec.describe "Menu" do
  
     before :all do
-        menu = Menu.new("Lunes") do
-            titulo      "Bajo en calorías",
-            ingesta     :min => 30, :max => 35
+        @menu = Menu.new("Lunes") do
+            titulo      "Bajo en calorías"
+            ingesta     :min => 30, 
+                        :max => 35
             desayuno    :descripcion => "Pan de trigo integral",
                         :porcion => "1 rodaja",
                         :gramos => 100,
@@ -21,7 +22,7 @@ RSpec.describe "Menu" do
                         :carbohidratos => 4.4,
                         :proteinas => 3.6,
                         :sal => 0.05
-            almuerzo    :description =>  "Arroz",
+            almuerzo    :descripcion =>  "Arroz",
                         :porcion => "1 taza",
                         :gramos => 100,
                         :grasas => 0.9,
@@ -29,7 +30,7 @@ RSpec.describe "Menu" do
                         :proteinas => 6.67,
                         :fibra => 1.4,
                         :sal => 0.04
-            almuerzo    "Lentejas",
+            almuerzo    :descripcion => "Lentejas",
                         :porcion => "1/2 cucharón",
                         :grasas => 0.4,
                         :carbohidratos => 20.0,
@@ -50,11 +51,15 @@ RSpec.describe "Menu" do
                         :carbohidratos => 4.6,
                         :proteinas => 3.1,
                         :sal => 0.13
-            end
+        end
     end
 
     it "has a version number" do
         expect(InformacionNutricional::VERSION).not_to be nil
+    end
+
+    it "has a to_s" do
+        puts @menu.to_s
     end
 
 end
