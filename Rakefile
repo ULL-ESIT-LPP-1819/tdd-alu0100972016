@@ -7,10 +7,10 @@ task :default => :spec
 
 desc "Ejecutar las expectativas de los menus y los pacientes"
 task :spec do
-	sh "rspec -I. spec/benchmark_spec.rb"
+	sh "rspec -I. spec/menu_spec.rb"
 end
 
 desc "Ejecutar con documentacion"
 task :doc do
-	sh "rspec -I. spec/benchmark_spec.rb --format documentation"
+	sh "rspec -I. spec/menu_spec.rb --format documentation"
 end
